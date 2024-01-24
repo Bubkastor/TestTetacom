@@ -1,0 +1,23 @@
+version: '3.4'
+networks:
+    myAppNetwork:
+services:
+    SqlServerDb:
+        container_name: habr-pg-13.3
+        image: postgres:13.3
+        environment:
+            POSTGRES_DB: "habrdb"
+            POSTGRES_USER: "habrpguser"
+            POSTGRES_PASSWORD: "pgpwd4habr"
+        ports:
+            - "5432:5432" 
+    testtetacom:
+        image: ${DOCKER_REGISTRY-}testtetacom
+        ports:
+            - 8080:80 
+            - 8081:80 
+        build:
+            context: .
+            dockerfile: TestTetacom/Dockerfile
+        depends_on:
+            - SqlServerDb

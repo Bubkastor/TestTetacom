@@ -4,6 +4,6 @@
     {
         public string StatusName { get; set; }
         public float Percentage { get; set; }
-        public float Hour { get; set; }
+        public double Hour { get; set; }
     }
 }

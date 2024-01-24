@@ -1,24 +1,35 @@
 ﻿using System;
+using System.Collections.Generic;
 
-namespace TestTetacom.Model
+namespace TestTetacom.Model;
+
+public partial class GroupedWellStatus
 {
-    public class GroupedWellStatus
-    {
-        public int Id { get; set; } // serial4 NOT NULL,
-        public int Val { get; set; } // int4 NOT NULL, -- статус скважины
-        public int WellId { get; set; }// int4 NOT NULL, -- id скважины
-        public float FullDuration { get; set; } //float8 NOT NULL,
-        public DateTime StartDt { get; set; } // timestamp NOT NULL, -- дата и время начала статуса
-        public DateTime EndDt { get; set; } // timestamp NOT NULL, -- дата и время окончания статуса
-        public bool IsDayChange { get; set; } // NOT NULL DEFAULT false, 
+    public int Id { get; set; }
 
-        public DateTime? NewDayStartDt { get; set; } // timestamp NULL, 
-        public float? NewDayDuration { get; set; } //float8 NULL, 
-        public DateTime? OldDayEndDt { get; set; } // timestamp NULL, 
-        public float? OldDayDuration { get; set; } // float8 NULL, 
-        public float? MdAfter { get; set; } // float8 NULL, 
-        public float? MdBefore { get; set; } //float8 NULL, 
-        public float? BitDepthAfter { get; set; } //float8 NULL, 
+    public WellStatus Val { get; set; }
 
-    }
+    public int WellId { get; set; }
+
+    public double FullDuration { get; set; }
+
+    public DateTime StartDt { get; set; }
+
+    public DateTime EndDt { get; set; }
+
+    public bool IsDayChange { get; set; }
+
+    public DateTime? NewDayStartDt { get; set; }
+
+    public double? NewDayDuration { get; set; }
+
+    public DateTime? OldDayEndDt { get; set; }
+
+    public double? OldDayDuration { get; set; }
+
+    public double? MdAfter { get; set; }
+
+    public double? MdBefore { get; set; }
+
+    public double? BitDepthAfter { get; set; }
 }

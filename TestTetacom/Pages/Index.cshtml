@@ -1,0 +1,35 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Активность</th>
+                <th>Всего [%]</th>
+                <th>Часы [ч]</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.ModelActivity)
+            {
+                <tr>
+                    <th>@item.StatusName</th>   
+                    <th>@item.Percentage</th>
+                    <th>@item.Hour</th>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <th></th>
+                <th>Сумма: @Model.SumPercentage</th>
+                <th>Сумма: @Model.SumHour</th>
+            </tr>
+        </tfoot>
+    </table>
+</div>

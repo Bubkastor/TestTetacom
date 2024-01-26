@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace TestTetacom.Model;
 
@@ -32,4 +34,9 @@ public partial class GroupedWellStatus
     public double? MdBefore { get; set; }
 
     public double? BitDepthAfter { get; set; }
+
+    public override string ToString()
+    {
+        return JsonSerializer.Serialize(this);
+    }
 }

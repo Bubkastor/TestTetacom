@@ -2,8 +2,8 @@
 {
     public record ViewStatusActivity
     {
-        public string StatusName { get; set; }
+        public required string StatusName { get; set; }
         public float Percentage { get; set; }
-        public double Hour { get; set; }
+        public int Hour { get; set; }
     }
 }

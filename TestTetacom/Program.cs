@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using TestTetacom;
 using TestTetacom.Repository;
+using TestTetacom.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,8 @@ builder.Services.AddRazorPages();
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<IGroupedWellStatusRepository, GroupedWellStatusRepository>();
+builder.Services.AddScoped<ISeachFirstSolution, SeachFirstSolution>();
+builder.Services.AddScoped<ISeachSecondSolution, SeachSecondSolution>();
 
 var app = builder.Build();
 

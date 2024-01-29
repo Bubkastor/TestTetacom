@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using TestTetacom.Attribute;
+using TestTetacom.Locale;
 
 namespace TestTetacom.Model
 {
@@ -22,7 +23,7 @@ namespace TestTetacom.Model
                 return string.Empty;
             }
 
-            return attr.Text;
+            return RuLocale.Locale[attr.Text];
         }
     }
 }

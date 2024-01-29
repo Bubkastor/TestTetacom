@@ -15,26 +15,21 @@ namespace TestTetacom.Service
         public List<ViewStatusActivity> FirstSolution(int wellId, DateTime startDateTime, DateTime endDateTime)
         {
             List<ViewStatusActivity> result = new List<ViewStatusActivity>();
+            var wellIds = _groupedWellStatusRepository.GetWellIds();
             var groupedWellStatuses = _groupedWellStatusRepository.GetGroupedWellStatus(wellId, startDateTime, endDateTime);
+            var sum = groupedWellStatuses.Sum(x => x.FullDuration);
             groupedWellStatuses.ForEach(x =>
             {
-                if (x.Val == WellStatus.OnSurface
-                || x.Val == WellStatus.InSlips
-                || x.Val == WellStatus.PullOutOfHole
-                || x.Val == WellStatus.RunInHole
-                || x.Val == WellStatus.StandBy)
-                {
-                    result.Add(new ViewStatusActivity() { StatusName = x.Val.ToStringView(), Percentage = 1, Hour = SecondsToHour(x.FullDuration)});
-                }
+                var percentage = x.FullDuration / sum;
+                result.Add(new ViewStatusActivity() { StatusName = x.Val.ToStringView(), Percentage = percentage, Hour = SecondsToHour(x.FullDuration) });
             });
 
             return result;
         }
 
-        private int SecondsToHour (double Seconds) 
+        private double SecondsToHour(double Seconds)
         {
-            TimeSpan timeSpan = TimeSpan.FromSeconds(Seconds);
-            return timeSpan.Hours;
+            return Seconds / 60 / 60;
         }
     }
 }

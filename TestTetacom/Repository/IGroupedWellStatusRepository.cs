@@ -7,6 +7,5 @@ namespace TestTetacom.Repository
         List<int> GetWellIds();
         List<GroupedWellStatus> GetGroupedWellStatusByWellStatus(List<WellStatus> wellStatuses);
         List<GroupedWellStatus> GetGroupedWellStatus(int wellId, DateTime startDateTime, DateTime endDateTime);
-        List<GroupedWellStatus> GetGroupedWellStatusToWellStatus(int wellId, DateTime startDateTime, WellStatus inSlips);
     }
 }

@@ -1,4 +1,5 @@
 ﻿@page
+@using TestTetacom.Model
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
@@ -6,11 +7,26 @@
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
+        <div class="card">
+        @Html.Label("WellId", "Скважина")
+        @Html.DropDownList("WellId", Model.WellIdsData)
+    </div>
+    <div class="text-start">
+        <p>Пример запроса</p>
+        <p>https://localhost:4305/?id=1318&start=2023-04-14 00:50:50&end=2023-05-19 05:48:31</p>
+        
+        <p>Переменные</p>
+        <p>id: номер скважины</p>
+        <p>start: начало</p>
+        <p>end: конец</p>
+    </div>
+
+
     <table>
         <thead>
             <tr>
                 <th>Активность</th>
-                <th>Всего [%]</th>
+                <th style="width: 400px">Всего [%]</th>
                 <th>Часы [ч]</th>
             </tr>
         </thead>
@@ -19,25 +35,44 @@
             {
                 <tr>
                     <th>@item.StatusName</th>   
-                    <th>@item.Percentage</th>
-                    <th>@item.Hour</th>
+                    <th>@item.Percentage.ToString("P")</th>
+                    <th>@item.Hour.ToString("0.000")</th>
                 </tr>
             }
         </tbody>
         <tfoot>
             <tr>
                 <th></th>
-                <th>Сумма: @Model.SumPercentage</th>
-                <th>Сумма: @Model.SumHour</th>
+                <th>Сумма: @Model.SumPercentage.ToString("P")</th>
+                <th>Сумма: @Model.SumHour.ToString("0.000")</th>
             </tr>
         </tfoot>
     </table>
-    RunInHole
-    <pre>
-    @foreach (var item in Model.GroupedWellStatusesRunInHole)
+
+    <h3 style="margin-top: 20px">Для стутсуса клинья</h3>
+        
+    @foreach (var key in Model.GroupedWellStatusesRunInHole.Keys)
     {
-        @item.ToString();        
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 400px">Активность</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.GroupedWellStatusesRunInHole[key])
+                {
+                    <tr>
+                        <th>@item.Val.ToStringView()</th>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th></th>
+                </tr>
+            </tfoot>
+        </table>
     }
-    </pre>
     
 </div>

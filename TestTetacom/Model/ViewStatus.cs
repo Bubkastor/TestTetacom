@@ -3,7 +3,7 @@
     public record ViewStatusActivity
     {
         public required string StatusName { get; set; }
-        public float Percentage { get; set; }
-        public int Hour { get; set; }
+        public double Percentage { get; set; }
+        public double Hour { get; set; }
     }
 }

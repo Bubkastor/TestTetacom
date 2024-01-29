@@ -13,7 +13,7 @@ namespace TestTetacom.Repository
 
         public List<int> GetWellIds()
         {
-            return dbContext.GroupedWellStatuses.DistinctBy(x => x.WellId).Select(x => x.WellId).ToList();
+            return dbContext.GroupedWellStatuses.Select(x => x.WellId).Distinct().ToList();
         }
 
         public List<GroupedWellStatus> GetGroupedWellStatusByWellStatus(List<WellStatus> wellStatuses)
@@ -23,12 +23,7 @@ namespace TestTetacom.Repository
 
         public List<GroupedWellStatus> GetGroupedWellStatus(int wellId, DateTime startDateTime, DateTime endDateTime)
         {
-            return dbContext.GroupedWellStatuses.Where(x => x.WellId == wellId && x.StartDt >= startDateTime && x.EndDt <= endDateTime).ToList();
-        }
-
-        public List<GroupedWellStatus> GetGroupedWellStatusToWellStatus(int wellId, DateTime startDateTime, WellStatus inSlips)
-        {
-            return dbContext.GroupedWellStatuses.Where(x => x.WellId == wellId && x.StartDt >= startDateTime && x.Val <= inSlips).ToList();
+            return dbContext.GroupedWellStatuses.Where(x => x.WellId == wellId && x.StartDt >= startDateTime && x.StartDt <= endDateTime).ToList();
         }
     }
 }
